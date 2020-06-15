@@ -29,7 +29,7 @@ First install cobra cli on you system [cobra](https://github.com/spf13/cobra)
 ```
 # First run some test
 go test ./... -coverprofile=coverage.out
-go tool cover -html=covergae.out
+go tool cover -html=coverage.out
 
 # Add command : 
 cobra add youcommand
