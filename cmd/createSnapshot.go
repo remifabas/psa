@@ -23,7 +23,7 @@ var createSnapshotCmd = &cobra.Command{
 		if stackSnap == "" || typeRDS == "" || snapName == "" {
 			fmt.Println("you must define stackName (integration-vi) \nand rds-type (rdstecdoc rdsranges) \nand snapshot name")
 		} else {
-			action.ActionCreateSnapshot(stack, typeRDS, snapName)
+			action.ActionCreateSnapshot(stackSnap, typeRDS, snapName)
 		}
 
 	},
