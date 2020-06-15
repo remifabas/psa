@@ -1,6 +1,7 @@
 package rds
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 
@@ -33,9 +34,8 @@ func listDBInstances(rdsService *rds.RDS) []*rds.DBInstance {
 
 // getDBInstanceID return the db identifier from the specific env and type of db
 // typeDB can only be rdstecodc or rdsranges
-func getDBInstanceID(listDBInstances []*rds.DBInstance, env string, typeDB string) string {
+func getDBInstanceID(listDBInstances []*rds.DBInstance, env string, typeDB string) (string, error) {
 	var dbInstanceIdentifier string = ""
-
 	for _, dbInstance := range listDBInstances {
 		if strings.Contains(*dbInstance.DBSubnetGroup.DBSubnetGroupName, env) {
 			if strings.Contains(*dbInstance.DBSubnetGroup.DBSubnetGroupName, typeDB) {
@@ -43,7 +43,10 @@ func getDBInstanceID(listDBInstances []*rds.DBInstance, env string, typeDB strin
 			}
 		}
 	}
-	return dbInstanceIdentifier
+	if len(dbInstanceIdentifier) <= 0 {
+		return "", errors.New("dbInstanceIdentifier not found")
+	}
+	return dbInstanceIdentifier, nil
 }
 
 func createSnapshot(rdsService *rds.RDS, dbInstanceID string, nameSnap string) (string, error) {
