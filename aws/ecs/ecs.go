@@ -75,15 +75,16 @@ func getService(services []*string, service string) (*string, error) {
 	return nil, errors.New("ERROR : service not found")
 }
 
-func forceNewDeploy(ecsService *ecs.ECS, service *string, clusterArn *string) error {
+func forceNewDeploy(ecsService *ecs.ECS, service *string, clusterArn *string) (*string, error) {
 	input := &ecs.UpdateServiceInput{
 		ForceNewDeployment: aws.Bool(true),
 		Service:            service,
 		Cluster:            clusterArn,
 	}
-	_, err := ecsService.UpdateService(input)
+	output, err := ecsService.UpdateService(input)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+
+	return output.Service.ServiceArn, nil
 }

@@ -135,5 +135,10 @@ func TestForceNewDeploy(t *testing.T) {
 	}
 	fmt.Println(*theServ)
 
-	forceNewDeploy(ecsS, theServ, c)
+	serviceARN, errDeploy := forceNewDeploy(ecsS, theServ, c)
+	if errDeploy != nil {
+		t.Errorf("Service Arn must be returned, Error : %v", errDeploy)
+	}
+
+	fmt.Println(*serviceARN)
 }

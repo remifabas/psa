@@ -1,6 +1,7 @@
 package ecs
 
 import (
+	"fmt"
 	"log"
 )
 
@@ -27,5 +28,9 @@ func ActionRestart(stack string, cluster string, service string) {
 		log.Fatalf("The service must be returned, %v shouln't appear", getServ)
 	}
 
-	forceNewDeploy(ecsS, theServ, c)
+	serviceArn, deployERR := forceNewDeploy(ecsS, theServ, c)
+	if deployERR != nil {
+		log.Fatalf("The service must be redeployed, ERROR : %v", deployERR)
+	}
+	fmt.Printf("Restart in progress : [%s]", *serviceArn)
 }
