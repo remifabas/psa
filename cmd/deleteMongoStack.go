@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var stackName string
+var stack string
 var typeMongo string
 
 // deleteMongoStackCmd represents the deleteStack command
@@ -19,12 +19,10 @@ var deleteMongoStackCmd = &cobra.Command{
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 
-		fmt.Println(stackName)
-
-		if stackName == "" || typeMongo == "" {
+		if stack == "" || typeMongo == "" {
 			fmt.Println("you must define --stack (integration-vi) \nand mongo --type (cms,data,front)")
 		} else {
-			action.ActionDeleteStack(stackName, typeMongo)
+			action.ActionDeleteStack(stack, typeMongo)
 		}
 
 	},
@@ -32,6 +30,6 @@ var deleteMongoStackCmd = &cobra.Command{
 
 func init() {
 	cloudformationCmd.AddCommand(deleteMongoStackCmd)
-	deleteMongoStackCmd.Flags().StringVarP(&stackName, "stack", "s", "", "stack name i.e. integration-v1")
-	deleteMongoStackCmd.Flags().StringVarP(&typeMongo, "type", "t", "", "mongo type cms,data,front")
+	deleteMongoStackCmd.Flags().StringVarP(&stack, "stack", "", "", "stack name i.e. integration-v1")
+	deleteMongoStackCmd.Flags().StringVarP(&typeMongo, "type", "", "", "mongo type cms,data,front")
 }
