@@ -55,7 +55,6 @@ func getMongoDBInstances(list []*ec2.Reservation) ([]*ec2.Reservation, error) {
 			return nil, errGetValue
 		}
 		if strings.Contains(name, "MongoDB") {
-			fmt.Println(" [OK] name :", name)
 			returnRes = append(returnRes, r)
 		}
 	}
@@ -72,4 +71,18 @@ func getValueTagName(tags []*ec2.Tag) (string, error) {
 		}
 	}
 	return "", errors.New("No KEY found with 'Name'")
+}
+
+func createSnap(ec2Service *ec2.EC2) {
+	// func (c *Client) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapshotRequest
+	input := &ec2.CreateSnapshotInput{
+		Description: aws.String("string description"),
+		//TODO
+		//VolumeId: thevolumeid,
+	}
+	ec2Service.CreateSnapshotRequest(input)
+}
+
+func getVolumeID(*ec2.Reservation) {
+	fmt.Println("TODO")
 }

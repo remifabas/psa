@@ -17,10 +17,11 @@ func TestGetInstances(t *testing.T) {
 	if errGetEC2 != nil {
 		t.Errorf("Error : get ec2 session ... %v", errGetEC2)
 	}
-	_, errGetInstances := getInstances(ec2Sess)
+	instances, errGetInstances := getInstances(ec2Sess)
 	if errGetInstances != nil {
 		t.Errorf("Error : get connection ... %v", errGetEC2)
 	}
+	fmt.Println(len(instances))
 }
 
 func TestGetMongoDBInstances(t *testing.T) {
@@ -38,4 +39,14 @@ func TestGetMongoDBInstances(t *testing.T) {
 		t.Errorf("Error : get Mongo instances ... %v", errGetEC2)
 	}
 	fmt.Println(len(mongoInstances))
+
+	fmt.Println(mongoInstances[29])
+}
+
+func TestCreateSnap(t *testing.T) {
+	ec2Sess, errGetEC2 := getEC2Session()
+	if errGetEC2 != nil {
+		t.Errorf("Error : get ec2 session ... %v", errGetEC2)
+	}
+	createSnap(ec2Sess)
 }
