@@ -11,6 +11,12 @@ go version
 ```
 [GO INSTALL](https://golang.org/doc/install)  
 
+Don't forget to add to your path your gopath (in my zshrc or bashrc)
+for me :
+```
+export PATH=$PATH:/home/remi/go/bin
+```
+
 Clone this repository then run in psa folder
 ```
 go install
@@ -18,6 +24,8 @@ go install
 psa -h
 ```
 You have now access to psa cli.
+
+list of [commands](commands.md)
 
 ## AWS Credentials
 In order to perform some basic commands you need your aws credentials set up  

@@ -8,7 +8,7 @@ import (
 // cloudformationCmd represents the cloudformation command
 var cloudformationCmd = &cobra.Command{
 	Use:   "cloudformation",
-	Short: "interact with psa aws cloudformation service",
+	Short: "Interact with psa aws cloudformation service",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 	},
