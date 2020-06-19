@@ -50,8 +50,12 @@ func getMongoDBInstances(list []*ec2.Reservation) ([]*ec2.Reservation, error) {
 	var returnRes []*ec2.Reservation
 	for _, r := range list {
 		tags := r.Instances[0].Tags
-		fmt.Println(*tags[0].Key)
-		if strings.Contains(*tags[0].Key, "MongoDB") {
+		name, errGetValue := getValueTagName(tags)
+		if errGetValue != nil {
+			return nil, errGetValue
+		}
+		if strings.Contains(name, "MongoDB") {
+			fmt.Println(" [OK] name :", name)
 			returnRes = append(returnRes, r)
 		}
 	}
@@ -59,4 +63,13 @@ func getMongoDBInstances(list []*ec2.Reservation) ([]*ec2.Reservation, error) {
 		return nil, errors.New("Error, no value found")
 	}
 	return returnRes, nil
+}
+
+func getValueTagName(tags []*ec2.Tag) (string, error) {
+	for _, t := range tags {
+		if strings.EqualFold(*t.Key, "Name") {
+			return *t.Value, nil
+		}
+	}
+	return "", errors.New("No KEY found with 'Name'")
 }

@@ -35,7 +35,7 @@ If not, ask them to an AWS admin, then run aws configure
 ## Develop
 First install cobra cli on you system [cobra](https://github.com/spf13/cobra) 
 ```
-# First run some test
+# Then run some test
 go test ./... -coverprofile=coverage.out
 go tool cover -html=coverage.out
 
