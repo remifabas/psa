@@ -196,7 +196,7 @@ func deleteStack(toDelete []string) error {
 		}
 
 		_, errLoop := cfsvc.DeleteStack(params)
-		fmt.Println("Delete stacl : ", stackToDelete)
+		fmt.Println("Delete stack : ", stackToDelete)
 
 		if errLoop != nil {
 			fmt.Println(errLoop)
