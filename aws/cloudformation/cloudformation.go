@@ -130,7 +130,7 @@ func filterStacks(stackName string, typeStack string) []string {
 	allStack := getAllStacks()
 	var searchedStacks []string
 	for _, s := range allStack {
-		if strings.Contains(*s.StackName, stackName) && strings.Contains(*s.StackName, typeStack) {
+		if strings.Contains(*s.StackName, stackName) && strings.Contains(*s.StackName, "-"+typeStack+"-") {
 			searchedStacks = append(searchedStacks, *s.StackName)
 		}
 	}
@@ -171,7 +171,7 @@ func listStackNotUsed(stackName string, typeExternalStack string) ([]string, err
 
 	for _, currentStack := range filteredStack {
 		if currentStack == stackInUse {
-			fmt.Println("Current Stack in used : ", currentStack)
+			fmt.Println("Current Stack in use : ", currentStack)
 		} else {
 			listStackNotUsed = append(listStackNotUsed, currentStack)
 		}

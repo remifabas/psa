@@ -91,7 +91,11 @@ func TestListStackNoUsed(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+	fmt.Println("TestListStackNoUsed : validation-v2")
 	fmt.Println(len(stacks))
+	for _, s := range stacks {
+		fmt.Println(s)
+	}
 }
 
 func TestDeleteStack(t *testing.T) {
