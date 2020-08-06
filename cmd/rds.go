@@ -8,7 +8,7 @@ import (
 // rdsCmd represents the rds command
 var rdsCmd = &cobra.Command{
 	Use:   "rds",
-	Short: "interact with psa aws rds service",
+	Short: "Interact with psa aws rds service",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 	},
